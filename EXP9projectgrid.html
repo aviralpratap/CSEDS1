@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Product Grid</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: #f4f4f4;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        background: #007bff;
+        color: white;
+    }
+
+    .navbar .logo {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 20px;
+    }
+
+    .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+    }
+
+    .nav-links a:hover {
+        text-decoration: underline;
+    }
+
+    .menu-btn {
+        display: none;
+        font-size: 26px;
+        cursor: pointer;
+    }
+
+    @media (max-width: 700px) {
+        .nav-links {
+            display: none;
+            flex-direction: column;
+            background: #007bff;
+            width: 100%;
+            padding: 15px 0;
+        }
+
+        .nav-links.show {
+            display: flex;
+        }
+
+        .menu-btn {
+            display: block;
+        }
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    .product-grid {
+        display: grid;
+        gap: 20px;
+        grid-template-columns: 1fr;
+    }
+
+    .product {
+        background: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+
+    .product img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .product h3 {
+        margin: 10px 0 5px;
+    }
+
+    .product p {
+        padding: 0 10px 10px;
+        color: #555;
+    }
+
+    .product button {
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 16px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .product button:hover {
+        background: #0056b3;
+    }
+
+    @media (min-width: 600px) {
+        .product-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (min-width: 900px) {
+        .product-grid {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+</style>
+
+</head>
+<body>
+
+<div class="navbar">
+    <div class="logo">MyStore</div>
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+
+    <div class="nav-links" id="navLinks">
+        <a href="#">Home</a>
+        <a href="#">Products</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </div>
+</div>
+
+<div class="container">
+    <h1 style="text-align:center;">Our Products</h1>
+
+    <div class="product-grid">
+
+        <div class="product">
+            <img src="data:image/jpeg;base64,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" alt="Headphones">
+            <h3>Wireless Headphones</h3>
+            <p>High-quality sound with noise cancellation.</p>
+            <button>Add to Cart</button>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=60" alt="Laptop">
+            <h3>Laptop Pro 15"</h3>
+            <p>Fast performance for work and gaming.</p>
+            <button>Add to Cart</button>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=60" alt="Camera">
+            <h3>DSLR Camera</h3>
+            <p>Capture stunning photos and videos.</p>
+            <button>Add to Cart</button>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=60" alt="Shoes">
+            <h3>Running Shoes</h3>
+            <p>Lightweight and comfortable for training.</p>
+            <button>Add to Cart</button>
+        </div>
+
+    </div>
+</div>
+
+<script>
+function toggleMenu() {
+    document.getElementById("navLinks").classList.toggle("show");
+}
+</script>
+
+</body>
+</html>
